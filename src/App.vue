@@ -1,12 +1,35 @@
 <template>
-  <h1>Dollar - Acompanhe o valor do dólar em tempo real</h1>
+  <main class="container">
+    <input-dolar @typedDolar="listenTypedDolar" />
+
+    {{ dollarTyped }}
+  </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, ref, toRefs } from 'vue'
+import InputDolar from '@components/InputDolar.vue'
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
+  components: {
+    InputDolar
+  },
+
+  setup () {
+    const dollarTyped = ref<string>()
+
+    const methods = reactive({
+      listenTypedDolar (value: string) {
+        dollarTyped.value = value
+      }
+    })
+
+    return {
+      dollarTyped,
+      ...toRefs(methods)
+    }
+  }
 })
 </script>
 
@@ -42,5 +65,10 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  padding-top: 4rem;
+  max-width: 100%;
 }
 </style>
