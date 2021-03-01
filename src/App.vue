@@ -1,14 +1,14 @@
 <template>
   <main class="container">
     <input-dolar @typedDolar="listenTypedDolar" />
-
-    {{ dollarTyped }}
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue'
 import InputDolar from '@components/InputDolar.vue'
+import { ICurrency } from '@/types.ts'
+import API from '@services/API.ts'
 
 export default defineComponent({
   name: 'App',
@@ -18,15 +18,27 @@ export default defineComponent({
 
   setup () {
     const dollarTyped = ref<string>()
+    const currency = ref<ICurrency>()
 
     const methods = reactive({
       listenTypedDolar (value: string) {
         dollarTyped.value = value
+      },
+
+      async loadCurrency (): Promise<void> {
+        const loadedCurrency: ICurrency = await API.load()
+
+        currency.value = loadedCurrency
       }
+    })
+
+    onMounted(() => {
+      methods.loadCurrency()
     })
 
     return {
       dollarTyped,
+      currency,
       ...toRefs(methods)
     }
   }
