@@ -28,7 +28,7 @@ export default defineComponent({
       updateDollar () {
         const value = this.toDecimal(dollar.value)
 
-        this.sendTypedDollar(value)
+        this.sendDollarTyped(value)
 
         dollar.value = value
       },
@@ -70,15 +70,15 @@ export default defineComponent({
         dollar.value = value
       },
 
-      sendTypedDollar (dollar: string): void {
-        emit('typedDolar', dollar)
+      sendDollarTyped (dollar: string): void {
+        emit('dollarTyped', dollar)
       }
     })
 
     watch(dollar, () => methods.sanitize())
 
     onMounted(() => {
-      methods.sendTypedDollar(DEFAULT_DOLLAR)
+      methods.sendDollarTyped(DEFAULT_DOLLAR)
     })
 
     return {
@@ -99,7 +99,7 @@ export default defineComponent({
 .input--code {
   color: var(--gray);
   font-weight: 500;
-  margin-left: 80px;
+  margin-left: 70px;
   margin-right: 5px;
 }
 
@@ -107,11 +107,21 @@ export default defineComponent({
   border: none;
   background-color: var(--bg );
   color: var(--text);
-  font-size: 2.5rem;
+  font-size: 30px;
   font-weight: 500;
 }
 
 .input--field:focus {
   outline: none;
+}
+
+@media (min-width: 768px) {
+  .input--code {
+    margin-left: 80px;
+  }
+
+  .input--field {
+    font-size: 40px;
+  }
 }
 </style>

@@ -11,3 +11,13 @@ export interface ICurrency {
   timestamp: string;
   varBid: string;
 }
+
+
+export interface IDataCurrency {
+  name: string;
+  cash: number;
+  pctChange: number;
+  dollar: number;
+  result: string;
+  state: string;
+}

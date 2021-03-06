@@ -1,27 +1,38 @@
 <template>
   <main class="container">
-    <input-dolar @typedDolar="listenTypedDolar" />
+    <input-dolar @dollarTyped="listenDollarTyped" />
+
+    <section class="currencies">
+      <currency :content="currency" code="USD" :dollarTyped="dollarTyped" />
+
+      <currency :content="currency" code="USDT" :dollarTyped="dollarTyped" />
+    </section>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue'
 import InputDolar from '@components/InputDolar.vue'
-import { ICurrency } from '@/types.ts'
-import API from '@services/API.ts'
+import Currency from '@components/Currency.vue'
+import API from '@services/API'
+import { ICurrency } from '@/types'
+
+const CURRENT_UPDATE_TIME = 60
 
 export default defineComponent({
   name: 'App',
   components: {
-    InputDolar
+    InputDolar,
+    Currency
   },
 
   setup () {
     const dollarTyped = ref<string>()
-    const currency = ref<ICurrency>()
+    const currency = ref({})
+    const interval = ref()
 
     const methods = reactive({
-      listenTypedDolar (value: string) {
+      listenDollarTyped (value: string) {
         dollarTyped.value = value
       },
 
@@ -29,16 +40,26 @@ export default defineComponent({
         const loadedCurrency: ICurrency = await API.load()
 
         currency.value = loadedCurrency
+      },
+
+      restartInterval (): void {
+        clearInterval(interval.value)
+
+        interval.value = setInterval(() => {
+          this.loadCurrency()
+        }, (CURRENT_UPDATE_TIME * 1000))
       }
     })
 
     onMounted(() => {
       methods.loadCurrency()
+      methods.restartInterval()
     })
 
     return {
       dollarTyped,
       currency,
+      interval,
       ...toRefs(methods)
     }
   }
@@ -82,5 +103,20 @@ body {
 .container {
   padding-top: 4rem;
   max-width: 100%;
+}
+
+.currencies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+
+@media (min-width: 768px) {
+  .currencies {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 90px;
+  }
 }
 </style>
