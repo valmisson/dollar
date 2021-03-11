@@ -1,4 +1,4 @@
-# Dolar
+# Dollar
 
 ## Project setup
 ```
