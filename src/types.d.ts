@@ -1,4 +1,4 @@
-export interface ICurrency {
+interface Currencies {
   ask: string;
   bid: string;
   code: string;
@@ -12,8 +12,7 @@ export interface ICurrency {
   varBid: string;
 }
 
-
-export interface IDataCurrency {
+interface DataCurrency {
   name: string;
   cash: number;
   pctChange: number;

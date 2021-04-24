@@ -20,7 +20,6 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch } from 'vue'
-import { IDataCurrency } from '@/types'
 
 export default defineComponent({
   name: 'Currency',
@@ -44,7 +43,7 @@ export default defineComponent({
   },
 
   setup (props) {
-    const data = reactive<IDataCurrency>({
+    const data = reactive<DataCurrency>({
       name: '',
       cash: 0,
       pctChange: 0,

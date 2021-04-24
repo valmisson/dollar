@@ -15,7 +15,6 @@ import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue'
 import InputDolar from '@components/InputDolar.vue'
 import Currency from '@components/Currency.vue'
 import API from '@services/API'
-import { ICurrency } from '@/types'
 
 const CURRENT_UPDATE_TIME = 60
 
@@ -37,7 +36,7 @@ export default defineComponent({
       },
 
       async loadCurrency (): Promise<void> {
-        const loadedCurrency: ICurrency = await API.load()
+        const loadedCurrency: Currencies = await API.load()
 
         currency.value = loadedCurrency
       },

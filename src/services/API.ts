@@ -1,5 +1,4 @@
 import Axios from 'axios'
-import { ICurrency } from '@/types.ts'
 
 abstract class API {
   private static codes: Array<string> = ['USD', 'USDT']
@@ -8,7 +7,7 @@ abstract class API {
     baseURL: 'https://economia.awesomeapi.com.br/json'
   })
 
-  static async load (): Promise<ICurrency> {
+  static async load (): Promise<Currencies> {
     const { data } = await this.api.get(`/all/${this.codes.join()}`)
 
     return data
