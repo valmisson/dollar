@@ -52,10 +52,15 @@ export default defineComponent({
       state: 'low'
     })
 
-    watch(props, () => {
-      const { name, high, pctChange } = props.content[props.code]
+    const currencyName: Record<string, string> = {
+      USD: 'Dólar Comercial',
+      USDT: 'Dólar Turismo'
+    }
 
-      data.name = name
+    watch(props, () => {
+      const { high, pctChange } = props.content[props.code]
+
+      data.name = currencyName[props.code]
       data.cash = parseFloat(high)
       data.pctChange = parseFloat(pctChange)
       data.dollar = parseFloat(props.dollarTyped.replace(/,/, '.'))
