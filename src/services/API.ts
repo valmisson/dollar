@@ -1,3 +1,4 @@
+import type { Currencies } from '@/types'
 import Axios from 'axios'
 
 abstract class API {

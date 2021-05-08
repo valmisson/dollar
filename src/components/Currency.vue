@@ -19,6 +19,7 @@
 </template>
 
 <script lang="ts">
+import type { DataCurrency } from '@/types'
 import { defineComponent, reactive, toRefs, watch } from 'vue'
 
 export default defineComponent({

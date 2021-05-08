@@ -1,4 +1,4 @@
-interface Currencies {
+export interface Currencies {
   ask: string;
   bid: string;
   code: string;
@@ -12,7 +12,7 @@ interface Currencies {
   varBid: string;
 }
 
-interface DataCurrency {
+export interface DataCurrency {
   name: string;
   cash: number;
   pctChange: number;

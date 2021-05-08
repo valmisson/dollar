@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts">
+import type { Currencies } from '@/types'
 import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue'
 import InputDolar from '@components/InputDolar.vue'
 import Currency from '@components/Currency.vue'
