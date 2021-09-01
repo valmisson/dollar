@@ -3,7 +3,7 @@ export interface Currencies {
   bid: string;
   code: string;
   codein: string;
-  create_date: string;
+  create_date: string; // eslint-disable-line camelcase
   high: string;
   low: string;
   name: string;
@@ -19,4 +19,5 @@ export interface DataCurrency {
   dollar: number;
   result: string;
   state: string;
+  stateImg: string;
 }

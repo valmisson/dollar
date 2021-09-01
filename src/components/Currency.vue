@@ -11,7 +11,7 @@
         <span class="currency__dollar" v-show="dollar !== 1" >{{ cash.toFixed(2) }}</span>
       </div>
 
-      <img :src="require(`@assets/${state}.svg`)" class="currency__state" alt="currency state">
+      <img :src="stateImg" class="currency__state" alt="currency state">
     </div>
 
     <p class="currency__type">{{ name }}</p>
@@ -50,12 +50,17 @@ export default defineComponent({
       pctChange: 0,
       dollar: 0,
       result: '0,00',
-      state: 'low'
+      state: 'low',
+      stateImg: getImageURL('low')
     })
 
     const currencyName: Record<string, string> = {
       USD: 'Dólar Comercial',
       USDT: 'Dólar Turismo'
+    }
+
+    function getImageURL (name: string): string {
+      return new URL(`../assets/${name}.svg`, import.meta.url).href
     }
 
     watch(props, () => {
@@ -67,6 +72,7 @@ export default defineComponent({
       data.dollar = parseFloat(props.dollarTyped.replace(/,/, '.'))
       data.result = (data.dollar * data.cash).toFixed(2).replace(/\./, ',')
       data.state = data.pctChange > 0 ? 'high' : 'low'
+      data.stateImg = getImageURL(data.state)
     })
 
     return {

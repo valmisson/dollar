@@ -33,7 +33,8 @@ export default defineComponent({
         dollar.value = value
       },
 
-      selectValue (e: { target: HTMLInputElement }): void {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      selectValue (e: any): void {
         e.target.select()
       },
 
