@@ -108,12 +108,15 @@ export default defineComponent({
   border: none;
   background-color: var(--bg );
   color: var(--text);
+  cursor: pointer;
   font-size: 30px;
   font-weight: 500;
+  width: 140px;
 }
 
+.input--field:hover,
 .input--field:focus {
-  outline: none;
+  outline: 1px solid var(--gray);
 }
 
 @media (min-width: 768px) {
