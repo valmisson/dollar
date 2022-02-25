@@ -6,8 +6,8 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "lint": "eslint src/**/*.{js,ts,vue}",
-    "publish-gh-pages": "run-s build push-gh-pages",
-    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "deploy": "run-s build gh-pages",
+    "gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
     "axios": "^0.26.0",
