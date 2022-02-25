@@ -23,7 +23,7 @@ import type { DataCurrency } from '@/types'
 import { defineComponent, reactive, toRefs, watch } from 'vue'
 
 export default defineComponent({
-  name: 'Currency',
+  name: 'AppCurrency',
 
   props: {
     content: {
