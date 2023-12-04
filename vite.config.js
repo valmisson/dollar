@@ -11,5 +11,8 @@ export default defineConfig({
       { find: '@components', replacement: path.resolve(__dirname, 'src', 'components') },
       { find: '@services', replacement: path.resolve(__dirname, 'src', 'services') }
     ]
+  },
+  server: {
+    port: 8080
   }
 })
